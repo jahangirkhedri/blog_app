@@ -53,7 +53,8 @@ class CategoryController extends BaseController
     {
         try {
             $data = $request->all();
-            $response = $this->category->update($data, $id);
+            $this->category->update($data, $id);
+            $response = $this->category->show($id);
             return $this->sendResponse($response, 'Category updated successfully.');
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage(), 'An error has occurred.', 502);
