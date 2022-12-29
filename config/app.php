@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -185,6 +185,12 @@ return [
         /*
          * Package Service Providers...
          */
+
+        /*
+         * Module Service Providers...
+         */
+
+        Blog\BlogServiceProvider::class,
 
         /*
          * Application Service Providers...
