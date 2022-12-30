@@ -26,7 +26,8 @@
             "Repository\\": "repository/",
             "Blog\\": "blog/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Blog\\Databases\\Factories\\": "blog/databases/factories/"
         }
     },
     "autoload-dev": {

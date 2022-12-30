@@ -4,6 +4,7 @@ namespace Blog\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\V1\BaseController;
 use Blog\Http\Request\CategoryRequest;
+use Blog\Http\Resources\V1\CategoryResource;
 use Blog\Models\Category;
 use Blog\Repository\CategoryRepository;
 
@@ -33,7 +34,7 @@ class CategoryController extends BaseController
         try {
             $data = $request->all();
             $response = $this->category->create($data);
-            return $this->sendResponse($response, 'Category created successfully.');
+            return $this->sendResponse(new CategoryResource($response), 'Category created successfully.');
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage(), 'An error has occurred.', 502);
         }
@@ -43,7 +44,7 @@ class CategoryController extends BaseController
     {
         try {
             $response = $this->category->show($id);
-            return $this->sendResponse($response, 'Show category');
+            return $this->sendResponse(new CategoryResource($response), 'Show category');
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage(), 'An error has occurred.', 502);
         }
@@ -55,7 +56,7 @@ class CategoryController extends BaseController
             $data = $request->all();
             $this->category->update($data, $id);
             $response = $this->category->show($id);
-            return $this->sendResponse($response, 'Category updated successfully.');
+            return $this->sendResponse(new CategoryResource($response), 'Category updated successfully.');
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage(), 'An error has occurred.', 502);
         }

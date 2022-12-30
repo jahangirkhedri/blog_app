@@ -11,7 +11,7 @@ class BlogServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/databases/migrations');
     }
 
 

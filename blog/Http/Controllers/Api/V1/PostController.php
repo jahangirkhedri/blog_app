@@ -5,6 +5,7 @@ namespace Blog\Http\Controllers\Api\V1;
 use App\Http\Controllers\Api\V1\BaseController;
 use App\Http\Controllers\Controller;
 use Blog\Http\Request\PostRequest;
+use Blog\Http\Resources\V1\PostResource;
 use Blog\Models\Post;
 use Blog\Repository\PostRepository;
 
@@ -36,7 +37,7 @@ class PostController extends BaseController
             $user=auth('sanctum')->user();
             $data['user_id'] = $user->id;
             $response = $this->post->create($data);
-            return $this->sendResponse($response, 'Post created successfully.');
+            return $this->sendResponse(new PostResource($response), 'Post created successfully.');
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage(), 'An error has occurred.', 502);
         }
@@ -47,7 +48,7 @@ class PostController extends BaseController
     {
         try {
             $response = $this->post->show($id);
-            return $this->sendResponse($response, 'Show post');
+            return $this->sendResponse(new PostResource($response), 'Show post');
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage(), 'An error has occurred.', 502);
         }
@@ -60,7 +61,7 @@ class PostController extends BaseController
             $data = $request->all();
              $this->post->update($data, $id);
              $response = $this->post->show($id);
-            return $this->sendResponse($response, 'Post updated successfully.');
+            return $this->sendResponse(new PostResource($response), 'Post updated successfully.');
         } catch (\Exception $exception) {
             return $this->sendError($exception->getMessage(), 'An error has occurred.', 502);
         }

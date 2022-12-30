@@ -28,14 +28,18 @@ class PostRepository extends Repository
 
 
     }
-    public function update(array $data,$id)
+
+    public function update(array $data, $id)
     {
         DB::beginTransaction();
         try {
-            $this->model->update($data);
-            $post = $this->show($id)->categories()->sync($data['categories']);
+            $record = $this->show($id);
+            $categories = $data['categories'];
+            unset($data['categories']);
+            $record->update($data);
+            $record->categories()->sync($categories);
             DB::commit();
-            return $post;
+            return $this->show($id);;
         } catch (\Throwable $e) {
             return new \RuntimeException($e->getMessage());
         }
